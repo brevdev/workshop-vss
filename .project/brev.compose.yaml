@@ -164,9 +164,9 @@ services:
                           count: all
                           driver: nvidia
         environment:
+            - SHELL=/bin/bash
             - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
-            - SHELL=/bin/bash
         healthcheck:
             interval: 30s
             retries: 3
@@ -175,7 +175,7 @@ services:
                 - CMD-SHELL
                 - curl -f http://localhost:8888/api || exit 1
             timeout: 10s
-        image: ghcr.io/rmkraus/video-search-and-summarization-devx/devx:main
+        image: ghcr.io/brevdev/workshop-vss/devx:main
         ipc: host
         networks:
             - devx
@@ -184,7 +184,7 @@ services:
         restart: always
         user: ubuntu
         volumes:
-            - ../video-search-and-summarization-devx:/project:cached
+            - ../workshop-vss:/project:cached
             - /var/run/docker.sock:/var/run/docker.sock
     graph-db:
         environment:
